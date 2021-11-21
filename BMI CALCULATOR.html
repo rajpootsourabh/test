@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JAVASCRIPT</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Aclonica&family=Manrope:wght@500&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .container {
+            border: 1px solid maroon;
+            height: 100vh;
+            background-color: rgb(218, 214, 214);
+            padding-left: 70px;
+            padding-top: 60px;
+        }
+
+        span {
+            color: rgba(0, 0, 0, 0.993)(162, 0, 255);
+            font-size: 17px;
+        }
+
+        input {
+            height: 22px;
+            border: 1px solid rgb(68, 0, 255);
+        }
+
+        p {
+            color: rgb(0, 0, 0);
+            font-weight: 600;
+            font-weight: 900;
+
+        }
+
+        .abc input {
+            height: auto;
+        }
+
+        .output {
+            color: rgb(255, 11, 11);
+            margin-top: 15px;
+            font-size: 19px;
+
+        }
+
+        .main {
+            margin-top: 15px;
+
+        }
+
+        .btn1 {
+            background-color: rgb(5, 112, 5);
+            color: white;
+            font-size: 16px;
+            padding: 2px 8px;
+            width: 115px;
+            height: 36px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 2px black;
+
+        }
+
+        .btn2 {
+            background-color: rgb(155, 155, 155);
+            color: white;
+            font-size: 16px;
+            padding: 2px 8px;
+            width: 70px;
+            height: 36px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 3px black;
+            margin-left: 2px;
+
+
+        }
+
+        button:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <h2 style="color: rgb(27, 25, 104); font-family: 'Aclonica', sans-serif;">BMI Calculator</h2>
+        <table width="500">
+            <form id="forms">
+                <tbody>
+                    <!-- ROW for AGE starts here -->
+                    <tr>
+                        <td width="60">Age:</td>
+                        <td width="240">
+                            <input type="text" name="inp2" id="age">
+                        </td>
+                    </tr>
+
+                    <!-- ROW for Gender starts here -->
+
+                    <tr>
+                        <td width="60">Gender:</td>
+                        <td class="abc" width="120">
+                            <input type="radio" name="gender" id="male" checked>
+                            <label for="male">Male</label>
+                            <input type="radio" name="gender" id="female">
+                            <label for="female">Female</label>
+                        </td>
+                    </tr>
+
+                    <!-- ROW for Waist Size starts here -->
+
+                    <tr>
+                        <td class="abc" width="60">Waist Size:</td>
+                        <td width="240">
+                            <input type="text" name="waist" id="waist" required>
+                        </td>
+                    </tr>
+
+                    <!-- ROW for Height starts here -->
+
+                    <tr>
+                        <td width="60">Height:</td>
+                        <td width="240">
+                            <input type="text" name="inp1" id="height" required>
+                        </td>
+                    </tr>
+
+                    <!-- ROW for Weight starts here -->
+                    <tr>
+                        <td width="60">Weight:</td>
+                        <td width="240">
+                            <input type="text" name="inp3" id="weight" required>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+        </table>
+        </form>
+
+        <!-- For output -->
+
+        <div class="main">
+            <p class="output">Output:</p>
+            <p id="demo"></p> <!-- BMI -->
+            <p id="status"></p> <!-- classification -->
+            <span>Risk of Type 2 Diabetes, hypertension & Cardiovascular Disease:</span>
+            <p id="health"></p> <!-- Waist & Gender -->
+            <button class="btn1" onclick="sourabh()">Calculate</button>
+            <button class="btn2" onclick="ram()">Clear</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!-- Javascript for clear button is here -->
+
+    <script>
+        function ram() {
+            document.getElementById("forms").reset();
+        }
+    </script>
+
+
+    <!-- Main Javascript starts from here -->
+
+    <script>
+        function sourabh() {
+            var gender = document.getElementsByName("gender");
+            var w = document.getElementById("waist").value;
+            var x = document.getElementById("height").value;
+            var y = document.getElementById("weight").value;
+            var z = document.getElementById("age").value;
+            var m = (0.3048 * x) * (0.3048 * x);
+            var res;
+            res = y / (m);
+
+            // Javascript for no input starts here!
+
+            if (res >= 0) {
+                document.getElementById("demo").innerHTML = "Your <b>BMI</b> is: " + res.toFixed(2) + " kg/m<sup>2</sup>";
+            }
+            else {
+                document.getElementById("demo").innerHTML = "Your <span style='color: blue'> <b>BMI</b></span> is Zero";
+            }
+
+            // Javascript for classification starts here!
+
+            if (res <= 18.49) {
+                document.getElementById("status").innerHTML = "You are <span style='color: orange'><i>Underweighted</i></span>";
+            }
+            else if (res >= 18.5 && res <= 24.99) {
+                document.getElementById("status").innerHTML = "You are <span style='color: green'><i>Healthy!</i></span>";
+            }
+            // if condition will be true the code inside it will be executed only
+
+            else if (res >= 25.0 && res <= 29.99) {
+                document.getElementById("status").innerHTML = "You are <span style='color: red'><i>Overweighted</i></span>";
+                if (gender[0].checked && w <= 40) {
+                    document.getElementById("health").innerHTML = "Increased Risk";
+                }
+                else if (gender[0].checked && w > 40) {
+                    document.getElementById("health").innerHTML = "High Risk";
+                }
+                else if (gender[1].checked && w > 35) {
+                    document.getElementById("health").innerHTML = "High Risk";
+                }
+
+                else if (gender[1].checked && w <= 35) {
+                    document.getElementById("health").innerHTML = "Increased Risk";
+                }
+                else {
+                    document.getElementById("health").innerHTML = "";
+                }
+            }
+
+            else if (res >= 30.0 && res <= 34.99) {
+                document.getElementById("status").innerHTML = "You are <span style='color: red'><i>Obese</i></span>";
+                if (gender[0].checked && w <= 40) {
+                    document.getElementById("health").innerHTML = "High Risk";
+                }
+                else if (gender[0].checked && w > 40) {
+                    document.getElementById("health").innerHTML = "Very High Risk";
+                }
+                else if (gender[1].checked && w > 35) {
+                    document.getElementById("health").innerHTML = "Very High Risk";
+                }
+                //new ends here
+                else if (gender[1].checked && w <= 35) {
+                    document.getElementById("health").innerHTML = "High Risk";
+                }
+                else {
+                    document.getElementById("health").innerHTML = "";
+                }
+            }
+
+            else if (res >= 35.0 && res <= 40) {
+                document.getElementById("status").innerHTML = "You are <span style='color: red'><i>Obese</i></span>";
+                if (gender[0].checked && w <= 40) {
+                    document.getElementById("health").innerHTML = "Very High Risk";
+                }
+                else if (gender[0].checked && w > 40) {
+                    document.getElementById("health").innerHTML = "Very High Risk";
+                }
+                else if (gender[1].checked && w > 35) {
+                    document.getElementById("health").innerHTML = "Very High Risk";
+                }
+                //new ends here
+                else if (gender[1].checked && w <= 35) {
+                    document.getElementById("health").innerHTML = "Very High Risk";
+                }
+                else {
+                    document.getElementById("health").innerHTML = "";
+                }
+            }
+            else if (res > 40) {
+                document.getElementById("status").innerHTML = "You are extrmely <span style='color: maroon'><i>Obese</i></span>";
+                if (gender[0].checked && w <= 40) {
+                    document.getElementById("health").innerHTML = "Extremely High Risk";
+                }
+                else if (gender[0].checked && w > 40) {
+                    document.getElementById("health").innerHTML = "Extremely High Risk";
+                }
+                else if (gender[1].checked && w > 35) {
+                    document.getElementById("health").innerHTML = "Extremely High Risk";
+                }
+                else if (gender[1].checked && w <= 35) {
+                    document.getElementById("health").innerHTML = "Extremely High Risk";
+                }
+                else {
+                    document.getElementById("health").innerHTML = "";
+                }
+            }
+            else {
+                document.getElementById("status").innerHTML = "<span style='color: maroon'>Sorry! You have not filled all required values</span>";
+            }
+        }
+    </script>
+</body>
+
+</html>
